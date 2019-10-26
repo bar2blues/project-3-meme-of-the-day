@@ -9,3 +9,26 @@ fetch("https://api.imgflip.com/get_memes", {
     : console.error(`Oops, we get an error ${response.status}`);
   return response;
 });
+
+function memesData(meme) {
+  const { id, name, width, height, url } = meme;
+  return { id, name, width, height, url };
+}
+let memesArray = [];
+
+function filterBySize(meme) {
+  return meme.height >= 500 || meme.width >= 500;
+}
+
+function filterMemes(memesArray) {
+  const filteredMemes = memesArray.filter(filterBySize);
+  return filteredMemes;
+}
+
+function sortById(firstMeme, nextMeme) {
+  return parseInt(firstMeme.id) - parseInt(nextMeme.id);
+}
+
+function sortMemes(memesArray) {
+  return memesArray.sort(sortById);
+}
